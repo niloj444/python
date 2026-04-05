@@ -4,7 +4,7 @@ import string
 
 st.set_page_config(page_title="Password Generator", page_icon="🔐", layout="centered")
 
-# ===== CSS Styling =====
+
 st.markdown("""
 <style>
 
@@ -90,20 +90,19 @@ section[data-testid="stMain"] > div > div[data-testid="stVerticalBlock"] {
 </style>
 """, unsafe_allow_html=True)
 
-# ===== TITLE =====
 st.title("🔐 Password Generator")
 
-# ===== INPUT =====
+
 length = st.number_input("Enter password length", min_value=4, max_value=50, value=12)
 
 upper = st.checkbox("Include Uppercase", value=True)
 digits = st.checkbox("Include Numbers", value=True)
 symbols = st.checkbox("Include Symbols", value=True)
 
-# ===== INFO =====
+
 st.info("💡 Tip: Use at least 12 characters with uppercase, numbers & symbols for strong passwords.")
 
-# ===== FUNCTION =====
+
 def generate_password(length, upper, digits, symbols):
     characters = ""
     
@@ -119,7 +118,7 @@ def generate_password(length, upper, digits, symbols):
     
     return ''.join(random.choice(characters) for _ in range(length))
 
-# ===== BUTTON =====
+
 if st.button("Generate Password 🚀"):
     if not (upper or digits or symbols):
         st.error("⚠️ Please select at least one option!")
@@ -129,7 +128,7 @@ if st.button("Generate Password 🚀"):
 
         st.code(password, language=None)
 
-        # Strength checker
+        
         if len(password) >= 12 and symbols and upper and digits:
             st.success("Strong Password 💪")
         elif len(password) >= 8:
