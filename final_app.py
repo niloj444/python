@@ -1,3 +1,4 @@
+
 import streamlit as st
 import random
 import string
@@ -50,13 +51,13 @@ label, p {
 /* Input */
 .stNumberInput input {
     background-color: rgba(255,255,255,0.2);
-    color: ;
+    color: white;
     border-radius: 10px;
 }
 
 /* Checkbox */
 .stCheckbox label {
-    color: white ;
+    color: white !important;
 }
 
 /* Button */
@@ -80,7 +81,7 @@ code {
 }
 
 /* Glass effect container */
-section[data-testid="stMain"] > div > div[data-testid="stVerticalBlock"] {
+div[data-testid="stVerticalBlock"] {
     background: rgba(255, 255, 255, 0.08);
     padding: 25px;
     border-radius: 15px;
@@ -105,7 +106,7 @@ st.info("💡 Tip: Use at least 12 characters with uppercase, numbers & symbols 
 
 # ===== FUNCTION =====
 def generate_password(length, upper, digits, symbols):
-    characters = ""
+    characters = string.ascii_lowercase
     
     if upper:
         characters += string.ascii_uppercase
@@ -121,12 +122,9 @@ def generate_password(length, upper, digits, symbols):
 
 # ===== BUTTON =====
 if st.button("Generate Password 🚀"):
-    if not (upper or digits or symbols):
-        st.error("⚠️ Please select at least one option!")
-    
-    else:
-        password = generate_password(length, upper, digits, symbols)
+    password = generate_password(length, upper, digits, symbols)
 
+    if password:
         st.code(password, language=None)
 
         # Strength checker
@@ -136,3 +134,7 @@ if st.button("Generate Password 🚀"):
             st.warning("Medium Password ⚠️")
         else:
             st.error("Weak Password ❌")
+    else:
+        st.error("Please select at least one option!")
+
+```
